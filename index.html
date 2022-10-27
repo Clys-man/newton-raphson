@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Método de Newton-Raphson</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+
+<body>
+    <table bgcolor="white">
+        <h1>Método de Newton-Raphson</h1>
+
+        <tr>
+            <th>
+
+                <br />
+                <div id="resultado"></div>
+            </th>
+        </tr>
+    </table>
+
+    <script>
+        function f(x) {
+            return 0 * Math.pow(x, 8) + 0 * Math.pow(x, 7) + 0.0009 * Math.pow(x, 6) - 0.0259 * Math.pow(x, 5) + 0.4227 * Math.pow(x, 4) - 3.9655 * Math.pow(x, 3) + 20.3082 * Math.pow(x, 2) - 48.729 * x + 36.3774;
+        }
+
+        function df(x) {
+            return 0 * Math.pow(x, 7) - 0.0001 * Math.pow(x, 6) + 0.0054 * Math.pow(x, 5) - 0.1295 * Math.pow(x, 4) + 1.6908 * Math.pow(x, 3) - 11.8964 * Math.pow(x, 2) + 40.6164 * x - 48.729;
+        }
+
+        var i = 0;
+        var err, xn
+        var x = parseFloat(prompt('Digite o valor de x0: '));
+        var resultado = '<table border="1"><thead><tr><td align="center">i</td><td align="center">x<sub></sub></td><td align="center">error</td></tr></thead><tbody>';
+
+        do {
+            xn = x;
+            x = x - f(x) / df(x);
+            err = Math.abs((x - xn));
+            console.log(err == 0.1)
+            resultado += '<tr><td>x<sub>' + i + '</sub></td><td>' + xn + '</td><td>' + err + '</td></tr>';
+            i++;
+        } while (x != xn && i < 300);
+
+        document.getElementById('resultado').innerHTML = resultado + '</tbody></table><br>' + (i == 100 ? 'Não é possivel resolver.' : 'A raiz é ' + x);
+
+    </script>
+</body>
+
+</html>
